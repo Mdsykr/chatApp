@@ -1,0 +1,124 @@
+{% extends 'base.html' %} {% block content %}
+<div class="room-container">
+  <div class="header">
+    <button type="button" class="back-btn" onClick="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h2 class="chat-room-title">Chat Room: {{code}}</h2>
+  </div>
+  <div class="messages" id="messages"></div>
+  <div class="inputs">
+    <input
+      type="text"
+      rows="3"
+      placeholder="Message"
+      name="message"
+      id="message"
+    />
+    <button type="button" class="send-btn" onClick="sendMessage()">
+      <i class="fas fa-paper-plane"></i> 
+    </button>
+    
+    <div class="image-input">
+      <button type="button" class="choose-file" onclick="toggleImageOptions()">
+        <i class="fas fa-paperclip"></i>
+      </button>
+          
+      <div class="image-options" id="image-options">
+        <input type="file" accept="image/*" id="image-upload" />
+        <button type="button" class="choose-image" onclick="chooseImage()">
+          <i class="fas fa-file-image"></i>
+        </button>
+        <button type="button" class="send-image" onclick="sendImage()">
+          <i class="fas fa-image"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript">
+  var socketio = io();
+  const messages = document.getElementById("messages");
+
+  const createMessage = (name, msg) => {
+    const content = `
+      <div class="text">
+        <span>
+          <strong>${name}</strong>: ${msg}
+        </span>
+        <span class="muted">
+          ${new Date().toLocaleString()}
+        </span>
+      </div>
+    `;
+    messages.innerHTML += content;
+    messages.scrollTop = messages.scrollHeight; // Auto scroll ke bawah
+  };
+
+  socketio.on("message", (data) => {
+    createMessage(data.name, data.message);
+  });
+
+  const sendMessage = () => {
+    const message = document.getElementById("message");
+    if (message.value == "") return;
+    socketio.emit("message", { data: message.value });
+    message.value = "";
+  };
+
+  const goBack = () => {
+    window.location.href = "/"; // Ganti URL sesuai dengan halaman home.html
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      sendMessage();
+    }
+  };
+
+  document
+    .getElementById("message")
+    .addEventListener("keydown", handleKeyPress);
+
+  const imageUploadInput = document.getElementById("image-upload");
+
+  function chooseImage() {
+    imageUploadInput.click(); // Pilih gambar saat tombol "Choose Image" ditekan
+  }
+
+  function sendImage() {
+    const file = imageUploadInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imageUrl = event.target.result;
+        createImageMessage(imageUrl); // Fungsi untuk menampilkan pesan gambar
+      };
+      reader.readAsDataURL(file);
+    }
+    closeImageOptions();
+  }
+
+  function createImageMessage(imageUrl) {
+    const content = `
+      <div class="image-message">
+        <img src="${imageUrl}" alt="Uploaded Image" />
+      </div>
+    `;
+    messages.innerHTML += content;
+    messages.scrollTop = messages.scrollHeight; // Auto scroll ke bawah
+  }
+
+  function toggleImageOptions() {
+    var imageOptions = document.getElementById("image-options");
+    imageOptions.classList.toggle("show");
+  }
+
+  function closeImageOptions() {
+    var imageOptions = document.getElementById("image-options");
+    imageOptions.classList.remove("show");
+  }
+</script>
+{% endblock %}

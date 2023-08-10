@@ -1,0 +1,262 @@
+body {
+  background-image: url('/static/css/Background.jpg');
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  backdrop-filter: blur(5px); /* Tambahkan efek blur di sini */
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}.buttons {
+  color: white;
+  position: absolute;
+  top: 10%;
+  width: 75%;
+  height: 75%;
+  background-image: url(/static/css/Background.jpg);
+  background-position: center;
+  background-size: cover;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  border: none;
+}
+
+.homes {
+  position: absolute;
+  top: 30%; /* Pindahkan elemen ke posisi yang lebih tinggi */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 450px;
+}
+.home {
+  position: relative;
+  width: 450px;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.home h3{
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 70px;
+  color: #fff;
+}
+.submit input, .join input{
+  position: relative;
+  width: 100%;
+  height: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+::placeholder{
+  color: #fff;
+  font-size: 18px;
+}
+
+.join button, .create-btn{
+  width: 100%;
+  height: 40px;
+  margin-bottom: 25px;
+  background: transparent;
+  background-color: crimson;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  border-radius: 7px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.join button:active, .create-btn:active{
+  font-size: 25px;
+} 
+
+.join button:hover, .create-btn:hover {
+  background-color: rgb(167, 0, 0);
+}
+
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Tampilan scroll kustom */
+.messages {
+  overflow-y: scroll;
+  flex: 1;
+  width: 100%;
+  padding-right: 10px; /* Menambahkan ruang untuk scroll */
+  box-sizing: content-box; /* Biarkan box-sizing tetap sesuai dengan kontennya */
+}
+
+/* Gaya scroll bar */
+.messages::-webkit-scrollbar {
+  width: 10px; /* Lebar scrollbar */
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3); /* Warna thumb scrollbar */
+  border-radius: 5px; /* Bentuk border-radius */
+}
+
+.messages::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.2); /* Warna track scrollbar */
+  border-radius: 5px; /* Bentuk border-radius */
+}
+
+
+
+
+
+
+
+
+.room-container {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-image: url('/static/css/Background.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  align-items: stretch;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.messages {
+  overflow-y: scroll;
+  flex: 1;
+  width: 100%;
+}
+
+.inputs {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.inputs input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  background: transparent;
+  color: #fff;
+}
+
+.text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+  font-size: 20px;
+}
+
+.muted {
+  font-size: 10px;
+  color: darkgray;
+}
+
+
+
+.chat-room-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #fff;
+  font-size: 20px;
+  text-align: right;
+}
+
+.image-input {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.image-input input[type="file"] {
+  display: none;
+}
+
+.image-input.active .image-options {
+  display: flex;
+}
+
+.choose-file,
+.choose-image,
+.send-image,
+.back-btn,
+.send-btn {
+  display: none;
+  background-color: crimson;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+
+.choose-file:hover,
+.choose-image:hover,
+.send-image:hover,
+.back-btn:hover,
+.send-btn:hover {
+  background-color: rgb(167, 0, 0);
+}
+
+.image-options {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.show {
+  display: flex;
+}
